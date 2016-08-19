@@ -77,11 +77,23 @@ public class ArcView extends View {
         mPaint.setColor(arc_color);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(circle_width);
-        canvas.drawArc(rectF,-90,180,false,mPaint);
-        mPaint.setStrokeWidth(2);
-        canvas.drawLine(mViewCenterX,0,mViewCenterX,getHeight(),mPaint);
+        Paint paint=setPaint(arc_color,circle_width, Paint.Style.STROKE);
+        canvas.drawArc(rectF,-90,180,false,paint);
+
 
     }
+    private Paint setPaint(int color,int lineWidth,Paint.Style style){
+        Paint paint=new Paint();
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        paint.setDither(true);
+        paint.setStrokeWidth(lineWidth);
+        paint.setStrokeCap(Paint.Cap.ROUND); //设置笔刷的样式 Paint.Cap.Round ,Cap.SQUARE等分别为圆形、方形
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStyle(style);
+        return paint;
+    }
+
 
     private int measureHeight(int measureSpec) {
         int specMode = MeasureSpec.getMode(measureSpec);
